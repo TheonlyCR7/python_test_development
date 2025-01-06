@@ -775,3 +775,43 @@ intervals = [[1,3],[2,6],[8,10],[15,18]]
 intervals.sort(key=lambda x: x[0])
 ```
 
+
+
+## 反转列表
+
+**`vals[::-1]`**
+
+- `[::-1]` 是切片操作，表示以步长 `-1` 逆序取整个序列。
+- 对于序列 `vals`，`vals[::-1]` 是其反转后的副本。
+
+示例：
+
+```python
+vals = [1, 2, 3, 2, 1]
+print(vals[::-1])  # 输出: [1, 2, 3, 2, 1]
+```
+
+
+
+## python中的三元表达式
+
+```
+value = true_value if condition else false_value
+```
+
+- **`condition`**：布尔表达式，决定是选择 `true_value` 还是 `false_value`。
+- **`true_value`**：当条件为 `True` 时的值。
+- **`false_value`**：当条件为 `False` 时的值。
+
+```
+current.next = list1 if list1 else list2
+```
+
+- `list1 if list1`
+
+  ：检查 list1是否非空（非 None）。
+
+  - 如果 `list1` 非空，则选择 `list1`。
+  - 如果 `list1` 为 `None`，则选择 `list2`。
+
+这行代码的作用是将 `list1` 或 `list2` 中未遍历的部分连接到结果链表。
