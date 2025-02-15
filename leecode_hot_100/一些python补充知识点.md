@@ -883,5 +883,310 @@ current.next = list1 if list1 else list2
 
 
 
-## 递归函数中传参问题
+## python中的Counter
 
+* 在 Python 中，`Counter` 是 `collections` 模块提供的一个非常方便的类，用于统计可哈希对象（如数字、字符串等）的频率。它是一个字典的子类，键是元素，值是该元素出现的次数。
+
+  ### `Counter` 的基本用法
+
+  1. **创建 `Counter` 对象**：
+
+     - 你可以从一个可迭代对象（如列表、字符串等）创建 `Counter` 对象，或者通过字典的方式显式地创建。
+
+     ```python
+     from collections import Counter
+     
+     # 从列表创建
+     nums = [1, 1, 2, 3, 3, 3]
+     counter = Counter(nums)
+     print(counter)
+     # 输出: Counter({3: 3, 1: 2, 2: 1})
+     
+     # 从字符串创建
+     string = "aabbbcccc"
+     counter = Counter(string)
+     print(counter)
+     # 输出: Counter({'c': 4, 'b': 3, 'a': 2})
+     
+     # 显式创建
+     counter = Counter({'a': 2, 'b': 3, 'c': 1})
+     print(counter)
+     # 输出: Counter({'b': 3, 'a': 2, 'c': 1})
+     ```
+
+  2. **访问元素的频率**：
+
+     - 可以像访问字典一样访问元素的频率。如果元素不存在，返回 0。
+
+     ```python
+     print(counter['a'])  # 输出: 2
+     print(counter['d'])  # 输出: 0
+     ```
+
+  3. **常用操作**：
+
+     - `most_common(n)`：返回频率最高的 `n` 个元素，以元组的形式返回 `(元素, 频率)`。
+
+     ```python
+     # 返回频率最高的两个元素
+     print(counter.most_common(2))
+     # 输出: [('c', 4), ('b', 3)]
+     ```
+
+     - `elements()`：返回一个迭代器，生成按频率排序的元素。
+
+     ```python
+     # 生成按频率排序的元素
+     print(list(counter.elements()))
+     # 输出: ['c', 'c', 'c', 'c', 'b', 'b', 'b', 'a', 'a']
+     ```
+
+  4. **更新计数**：
+
+     - 使用 `update()` 方法可以将另一个可迭代对象的计数加到当前 `Counter` 对象上。
+
+     ```python
+     counter.update([3, 3, 3, 4])
+     print(counter)
+     # 输出: Counter({'c': 4, 'b': 3, 'a': 2, 3: 4, 4: 1})
+     ```
+
+  5. **减去计数**：
+
+     - 使用 `subtract()` 方法可以从当前 `Counter` 对象中减去另一个可迭代对象的计数。
+
+     ```python
+     counter.subtract([3, 4])
+     print(counter)
+     # 输出: Counter({'c': 4, 'b': 3, 'a': 2, 3: 3, 4: 0})
+     ```
+
+  6. **数学运算**：
+
+     - `Counter` 支持加法、减法、交集和并集等数学运算。
+
+     ```python
+     counter1 = Counter({'a': 3, 'b': 2})
+     counter2 = Counter({'a': 1, 'b': 1, 'c': 4})
+     
+     # 加法
+     print(counter1 + counter2)
+     # 输出: Counter({'a': 4, 'b': 3, 'c': 4})
+     
+     # 减法
+     print(counter1 - counter2)
+     # 输出: Counter({'a': 2, 'b': 1})
+     
+     # 交集
+     print(counter1 & counter2)
+     # 输出: Counter({'a': 1, 'b': 1})
+     
+     # 并集
+     print(counter1 | counter2)
+     # 输出: Counter({'a': 3, 'b': 2, 'c': 4})
+     ```
+
+  ### 总结
+
+  - `Counter` 是一个非常方便的工具，用于统计元素的频率，并提供了许多用于频率操作的内置方法。
+  - 它在处理需要统计频率的任务时非常高效，常用于排序、查找前几个频繁出现的元素、计算集合操作等场景。
+
+  如果你有更多具体的应用场景，可以告诉我，我会进一步提供帮助。
+
+
+
+## python中求平方根
+
+* 在 Python 中，计算平方根有几种常用的方法。这里我给你介绍几种常用的方法。
+
+  ### 1. 使用 `math.sqrt()` 函数
+
+  `math.sqrt()` 是 Python 内置的 `math` 模块中的一个函数，用来计算一个数字的平方根。
+
+  #### 示例：
+
+  ```python
+  import math
+  
+  num = 16
+  sqrt_num = math.sqrt(num)
+  print(sqrt_num)  # 输出：4.0
+  ```
+
+  这个方法适用于所有非负的数字，如果传入负数，`math.sqrt()` 会抛出 `ValueError`。
+
+  ### 2. 使用幂运算 `**` 来计算平方根
+
+  Python 的幂运算符 `**` 可以用来计算任何数的任意次方。所以，你可以使用 `0.5` 来表示平方根（即 `num**0.5`）。
+
+  #### 示例：
+
+  ```python
+  num = 16
+  sqrt_num = num ** 0.5
+  print(sqrt_num)  # 输出：4.0
+  ```
+
+  ### 3. 使用 `pow()` 函数
+
+  `pow()` 函数也是 Python 内置函数之一。`pow(x, y)` 等价于 `x**y`，用于计算 `x` 的 `y` 次方。你可以用它来计算平方根。
+
+  #### 示例：
+
+  ```python
+  num = 16
+  sqrt_num = pow(num, 0.5)
+  print(sqrt_num)  # 输出：4.0
+  ```
+
+  ### 4. 使用 `numpy` 的 `sqrt()` 函数
+
+  如果你使用 NumPy 进行数值计算，可以通过 `numpy.sqrt()` 来计算平方根。`numpy.sqrt()` 可以接受数组并对数组中的每个元素进行平方根计算。
+
+  #### 示例：
+
+  ```python
+  import numpy as np
+  
+  num = 16
+  sqrt_num = np.sqrt(num)
+  print(sqrt_num)  # 输出：4.0
+  ```
+
+  如果你传入一个负数，它会返回 `NaN`（Not a Number）。
+
+  ### 5. 对负数的平方根
+
+  如果你需要计算负数的平方根，可以使用 `cmath` 模块。`cmath.sqrt()` 会返回复数类型的结果。
+
+  #### 示例：
+
+  ```python
+  import cmath
+  
+  num = -16
+  sqrt_num = cmath.sqrt(num)
+  print(sqrt_num)  # 输出：4j
+  ```
+
+  这里，`4j` 表示一个虚数，`j` 是虚数单位。
+
+  ### 总结
+
+  - 对于正数和零，使用 `math.sqrt()` 或 `num**0.5` 都很方便。
+  - 如果你要处理负数，使用 `cmath.sqrt()` 可以得到复数结果。
+  - `numpy.sqrt()` 更适用于处理数组或矩阵等大量数据时。
+
+
+
+## python中如何判断一个数是整数
+
+* 在 Python 中，可以通过几种方法来判断一个数是否为整数。下面列出一些常见的方式：
+
+  ### 1. 使用 `isinstance()` 函数
+
+  `isinstance()` 可以检查一个对象是否是某个类型的实例。在判断整数时，可以用它来判断一个值是否是 `int` 类型。
+
+  #### 示例：
+
+  ```python
+  num = 5
+  
+  if isinstance(num, int):
+      print("是整数")
+  else:
+      print("不是整数")
+  ```
+
+  ### 2. 使用 `type()` 函数
+
+  `type()` 返回对象的类型，可以直接与 `int` 类型进行比较，判断是否是整数。
+
+  #### 示例：
+
+  ```python
+  num = 5
+  
+  if type(num) == int:
+      print("是整数")
+  else:
+      print("不是整数")
+  ```
+
+  ### 3. 判断浮点数是否是整数（通过 `is_integer()` 方法）
+
+  如果你有一个浮点数，且你想判断它是否代表一个整数（例如，`5.0` 应该被认为是整数），你可以使用 `float` 对象的 `is_integer()` 方法。
+
+  #### 示例：
+
+  ```python
+  num = 5.0
+  
+  if isinstance(num, float) and num.is_integer():
+      print("是整数")
+  else:
+      print("不是整数")
+  ```
+
+  `is_integer()` 返回 `True` 如果数字是一个整数（例如 `5.0`），否则返回 `False`。
+
+  ### 4. 使用 `math.modf()` 检查数字的小数部分
+
+  `math.modf()` 返回一个浮点数的两个部分：小数部分和整数部分。可以通过检查小数部分是否为零来判断一个数是否是整数。
+
+  #### 示例：
+
+  ```python
+  import math
+  
+  num = 5.0
+  
+  # 拆分成小数部分和整数部分
+  decimal_part, integer_part = math.modf(num)
+  
+  if decimal_part == 0:
+      print("是整数")
+  else:
+      print("不是整数")
+  ```
+
+  ### 5. 对于字符串输入的判断
+
+  如果你有一个字符串类型的数字，并想判断它是否能转换为整数，可以使用 `str.isdigit()` 或 `int()` 的异常处理。
+
+  #### 示例：
+
+  ```python
+  num_str = "123"
+  
+  if num_str.isdigit():
+      print("是整数")
+  else:
+      print("不是整数")
+  ```
+
+  但需要注意的是，`isdigit()` 只能用于判断正整数，如果是负数或者包含小数点的数字需要额外处理。
+
+  ### 6. 判断整数的特殊情况（比如负数的整数判断）
+
+  可以用正则表达式判断一个字符串是否符合整数格式，包括负数。
+
+  ```python
+  import re
+  
+  num_str = "-123"
+  
+  if re.match(r"^-?\d+$", num_str):
+      print("是整数")
+  else:
+      print("不是整数")
+  ```
+
+  ### 总结
+
+  - **`isinstance(num, int)`** 或 **`type(num) == int`** 是判断数字是否是整数最直接的方式。
+  - **`num.is_integer()`** 可以判断一个浮点数是否是整数。
+  - **`math.modf()`** 方法可以通过分离整数和小数部分来判断。
+  - 对于字符串，你可以用 **`str.isdigit()`** 或正则表达式来检查它是否符合整数格式。
+
+  如果你需要处理浮点数并希望判断是否是整数形式，可以结合 `is_integer()` 或其他方法来做更细致的判断。
